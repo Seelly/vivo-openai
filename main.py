@@ -59,7 +59,7 @@ async def chat_completions(request: ChatCompletionRequest):
         }
     }
     if request.messages is not None:
-        data['messages'] = request.messages
+        data['messages'] = [msg.dict() for msg in request.messages]
     elif request.prompt is not None:
         data['prompt'] = request.prompt
     if request.stream:
