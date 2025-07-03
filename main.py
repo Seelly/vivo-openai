@@ -1,11 +1,16 @@
+import os
 import uuid
 from typing import List, Optional
 from fastapi import FastAPI
 from pydantic import BaseModel
 from pydantic.v1 import validator
 from starlette.responses import StreamingResponse
+from dotenv import load_dotenv
 
 from vivo import VivoGPT
+
+# 加载 .env 文件中的环境变量
+load_dotenv()
 
 
 class ChatMessage(BaseModel):
@@ -34,7 +39,7 @@ class ChatCompletionRequest(BaseModel):
 
 app = FastAPI()
 
-gpt = VivoGPT(app_id="", app_key="")
+gpt = VivoGPT(app_id=os.getenv("VIVO_APP_ID", ""), app_key=os.getenv("VIVO_APP_KEY", ""))
 
 
 @app.post("/v1/chat/completions")
