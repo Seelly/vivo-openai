@@ -1,0 +1,12 @@
+services:
+  vivo-openai:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - "8000:8000"
+    environment:
+      - VIVO_APP_ID=${VIVO_APP_ID}
+      - VIVO_APP_KEY=${VIVO_APP_KEY}
+    restart: unless-stopped
+    container_name: vivo-openai-api 
